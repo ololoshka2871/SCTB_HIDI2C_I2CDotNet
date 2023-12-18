@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FT260_I2CDotNet
+namespace SCTB_HIDI2C_I2CDotNet
 {
-	public class BusNotReadyException : FT260Exception
+	public class BusNotReadyException : HidI2CException
 	{
 		#region Constructors
 
@@ -34,7 +34,7 @@ namespace FT260_I2CDotNet
 		#endregion Methods
 	}
 
-	public class DeviceConfigurationsIncorrect : FT260Exception
+	public class DeviceConfigurationsIncorrect : HidI2CException
 	{
 		#region Constructors
 
@@ -45,12 +45,12 @@ namespace FT260_I2CDotNet
 		#endregion Constructors
 	}
 
-	public class DeviceNotFoundException : FT260Exception
+	public class DeviceNotFoundException : HidI2CException
 	{
 		#region Fields
 
-		public readonly int pid = FT260.DEFAULT_VID;
-		public readonly int vid = FT260.DEFAULT_PID;
+		public readonly int pid;
+		public readonly int vid;
 
 		#endregion Fields
 
@@ -72,28 +72,28 @@ namespace FT260_I2CDotNet
 
 		public override string ToString()
 		{
-			return $"Can't find FT260 device with VID={vid}, PID={pid}";
+			return $"Can't find Sctb HidI2C device with VID={vid}, PID={pid}";
 		}
 
 		#endregion Methods
 	}
 
-	public class FT260Exception : Exception
+	public class HidI2CException : Exception
 	{
 		#region Constructors
 
-		public FT260Exception() : base()
+		public HidI2CException() : base()
 		{
 		}
 
-		public FT260Exception(string message) : base(message)
+		public HidI2CException(string message) : base(message)
 		{
 		}
 
 		#endregion Constructors
 	}
 
-	public class ReadException : FT260Exception
+	public class ReadException : HidI2CException
 	{
 		#region Constructors
 
@@ -103,7 +103,7 @@ namespace FT260_I2CDotNet
 		#endregion Constructors
 	}
 
-	public class TransactionException : FT260Exception
+	public class TransactionException : HidI2CException
 	{
 		#region Fields
 
@@ -127,7 +127,7 @@ namespace FT260_I2CDotNet
 		#endregion Constructors
 	}
 
-	public class Timeout : FT260Exception
+	public class Timeout : HidI2CException
 	{
 		#region Constructors
 

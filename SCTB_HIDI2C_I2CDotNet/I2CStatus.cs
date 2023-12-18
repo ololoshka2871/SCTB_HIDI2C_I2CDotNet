@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace FT260_I2CDotNet
+namespace SCTB_HIDI2C_I2CDotNet
 {
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	internal struct I2CStatus

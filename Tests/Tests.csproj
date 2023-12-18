@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0;netcoreapp3.0</TargetFramework>
+    <TargetFrameworks>netcoreapp2.0;netcoreapp3.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
@@ -14,6 +14,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FT260_I2CDotNet\FT260_I2CDotNet.csproj" />
+    <ProjectReference Include="..\SCTB_HIDI2C_I2CDotNet\SCTB_HIDI2C_I2CDotNet.csproj" />
   </ItemGroup>
 </Project>

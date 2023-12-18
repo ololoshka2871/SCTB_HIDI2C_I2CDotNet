@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace FT260_I2CDotNet
+namespace SCTB_HIDI2C_I2CDotNet
 {
 	internal static class Deserialiser
 	{

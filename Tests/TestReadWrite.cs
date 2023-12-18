@@ -1,4 +1,4 @@
-﻿using FT260_I2CDotNet;
+﻿using SCTB_HIDI2C_I2CDotNet;
 using HidSharp;
 using NUnit.Framework;
 using System;
@@ -29,7 +29,7 @@ namespace Tests
 		[Test]
 		public void Reset()
 		{
-			var ft260 = new FT260(FT260Dev);
+			var ft260 = new HidU2C(FT260Dev);
 			Assert.True(ft260.TryOpen());
 
 			ft260.I2C_Reset();
@@ -38,10 +38,10 @@ namespace Tests
 		[Test]
 		public void Scantest()
 		{
-			var ft260 = new FT260(FT260Dev);
+			var ft260 = new HidU2C(FT260Dev);
 			Assert.True(ft260.TryOpen());
 
-			for (int i = FT260.I2C_AddressMin; i <= FT260.I2C_AddressMax; ++i)
+			for (int i = HidU2C.I2C_AddressMin; i <= HidU2C.I2C_AddressMax; ++i)
 			{
 				var res = ft260.I2C_Detect(i);
 				if (res)
@@ -54,10 +54,10 @@ namespace Tests
 		[Test]
 		public void Read()
 		{
-			var ft260 = new FT260(FT260Dev);
+			var ft260 = new HidU2C(FT260Dev);
 			Assert.True(ft260.TryOpen());
 
-			for (int i = FT260.I2C_AddressMin; i <= FT260.I2C_AddressMax; ++i)
+			for (int i = HidU2C.I2C_AddressMin; i <= HidU2C.I2C_AddressMax; ++i)
 			{
 				var res = ft260.I2C_Detect(i);
 				if (res)

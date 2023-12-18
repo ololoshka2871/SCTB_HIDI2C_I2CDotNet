@@ -2,19 +2,16 @@
 using System;
 using System.Threading;
 
-namespace FT260_I2CDotNet
+namespace SCTB_HIDI2C_I2CDotNet
 {
-	public class FT260 : IDisposable
+	public class HidU2C : IDisposable
 	{
 		#region Fields
 
-		public const int DEFAULT_PID = 0x6030;
-		public const int DEFAULT_VID = 0x0403;
 		public const int I2C_AddressMax = 0x7F;
 		public const int I2C_AddressMin = 0;
 
-		internal const int MaxTransactionPyload = 64 - 4 
-			- 1; // (windows raises exception on 60)
+		internal const int MaxTransactionPyload = 32 - 4;
 
 		private readonly HidDevice FT260Device;
 		private readonly RequestBuilder RequestBuilder;
@@ -133,8 +130,6 @@ namespace FT260_I2CDotNet
 					return false;
 				}
 			}
-
-			EnableI2C();
 			return true;
 		}
 
@@ -189,18 +184,6 @@ namespace FT260_I2CDotNet
 		}
 
 		private static bool IsI2CEnabled(byte[] state) => state[5] == 1;
-
-		private void EnableI2C()
-		{
-			var state = RequestBuilder.BuildGetStateRequest();
-
-			Stream.GetFeature(state);
-			if (!IsI2CEnabled(state))
-			{
-				Stream.SetFeature(RequestBuilder.BuildEnableI2C());
-			}
-			SetSpeed();
-		}
 
 		private void FlistRead()
 		{
@@ -276,7 +259,7 @@ namespace FT260_I2CDotNet
 
 		#region Constructors
 
-		public FT260(HidDevice device)
+		public HidU2C(HidDevice device)
 		{
 			FT260Device = device;
 			RequestBuilder = new RequestBuilder()
@@ -285,11 +268,7 @@ namespace FT260_I2CDotNet
 			};
 		}
 
-		public FT260() : this(DEFAULT_VID, DEFAULT_PID)
-		{
-		}
-
-		public FT260(int vid, int pid)
+		public HidU2C(int vid, int pid)
 		{
 			if (!DeviceList.Local.TryGetHidDevice(out FT260Device, vid, pid))
 			{

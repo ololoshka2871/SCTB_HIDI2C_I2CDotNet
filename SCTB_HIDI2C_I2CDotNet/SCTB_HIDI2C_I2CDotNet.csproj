@@ -5,4 +5,7 @@
   <ItemGroup>
     <PackageReference Include="HidSharp" Version="2.0.5" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 </Project>

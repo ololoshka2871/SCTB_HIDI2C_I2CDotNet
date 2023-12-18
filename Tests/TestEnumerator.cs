@@ -1,4 +1,4 @@
-using FT260_I2CDotNet;
+using SCTB_HIDI2C_I2CDotNet;
 using NUnit.Framework;
 using System.Linq;
 
@@ -22,8 +22,8 @@ namespace Tests
 		{
 			var dev = Enumerator.Enumerate().First();
 
-			var d1 = new FT260(dev);
-			var d2 = new FT260(dev);
+			var d1 = new HidU2C(dev);
+			var d2 = new HidU2C(dev);
 
 			Assert.True(d1.TryOpen());
 			Assert.False(d2.TryOpen());
