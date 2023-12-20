@@ -103,25 +103,25 @@ namespace SCTB_HIDI2C_I2CDotNet
 		#endregion Constructors
 	}
 
-	public class TransactionException : HidI2CException
+	public class SpeedComtrolException : HidI2CException
 	{
-		#region Fields
-
-		public readonly bool ANAK;
-		public readonly bool Arbitration;
-		public readonly bool BusBusy;
-		public readonly bool DNAK;
-
-		#endregion Fields
 
 		#region Constructors
 
-		internal TransactionException(I2CStatus status) : base()
+		internal SpeedComtrolException(uint speed) : base($"Failed to setup bus speed {speed} KHz")
 		{
-			ANAK = status.ANAK;
-			DNAK = status.DNAK;
-			Arbitration = status.Arbitration;
-			BusBusy = status.BusBusy;
+		}
+
+		#endregion Constructors
+	}
+
+	public class UnknownError : HidI2CException
+	{
+
+		#region Constructors
+
+		internal UnknownError(byte e) : base($"Unknown I2C error 0x{e:X}")
+		{
 		}
 
 		#endregion Constructors
@@ -133,6 +133,24 @@ namespace SCTB_HIDI2C_I2CDotNet
 
 		internal Timeout(TimeoutException ex) : base(ex.Message)
 		{
+		}
+
+		#endregion Constructors
+	}
+
+	public class TransactionException : HidI2CException
+	{
+		#region Fields
+
+		public readonly HwError error;
+
+		#endregion Fields
+
+		#region Constructors
+
+		internal TransactionException(byte status) : base()
+		{
+			error = (HwError)(status &~(byte)ResultCode.HwError);
 		}
 
 		#endregion Constructors
