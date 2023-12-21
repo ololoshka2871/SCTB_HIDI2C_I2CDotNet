@@ -12,6 +12,7 @@ namespace SCTB_HIDI2C_I2CDotNet
 		public const byte I2CWriteRequest = 0x0A;
 
 		public const byte SetSpeedRequest = 0x10;
+		public const byte ResetBusRequest = 0x69;
 
 		#endregion Constants
 
@@ -35,7 +36,9 @@ namespace SCTB_HIDI2C_I2CDotNet
 		public byte[] BuildScanRequest(int i2c_addr)
 			=> new byte[] { FirstByte, I2CReadRequest, 1, (byte)i2c_addr };
 
-		public byte[] BuildSetSpeedRequest(uint speed_khz) => new byte[4] { FirstByte, SetSpeedRequest, (byte)(speed_khz & 0xff), (byte)(speed_khz >> 8) };
+		public byte[] BuildSetSpeedRequest(uint speed_khz) => new byte[] { FirstByte, SetSpeedRequest, (byte)(speed_khz & 0xff), (byte)(speed_khz >> 8) };
+
+		public byte[] BuildResetBusRequest() => new byte[] { FirstByte, ResetBusRequest };
 
 		#endregion Methods
 	}

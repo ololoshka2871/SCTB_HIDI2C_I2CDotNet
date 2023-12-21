@@ -46,7 +46,7 @@ namespace SCTB_HIDI2C_I2CDotNet
 		public const int I2C_AddressMax = 0x7F;
 		public const int I2C_AddressMin = 0;
 
-		internal const int MaxTransactionPyload = 60;
+		public const int MaxTransactionPyload = 60;
 
 		private readonly HidDevice SCTBHidI2CDevice;
 		private readonly RequestBuilder RequestBuilder;
@@ -110,6 +110,24 @@ namespace SCTB_HIDI2C_I2CDotNet
 		/// </summary>
 		public void I2C_Reset()
 		{
+			var req = RequestBuilder.BuildResetBusRequest();
+			Stream.Write(req);
+
+			byte[] resp;
+			try
+			{
+				resp = Stream.Read();
+			}
+			catch (TimeoutException ex)
+			{
+				throw new Timeout(ex);
+			}
+
+			var error_code = resp[1];
+			if (error_code != (byte)ResultCode.Ok)
+			{
+				throw new UnknownError(error_code);
+			}
 		}
 
 		public void Read(int i2c_addr, out byte[] data, int size)
