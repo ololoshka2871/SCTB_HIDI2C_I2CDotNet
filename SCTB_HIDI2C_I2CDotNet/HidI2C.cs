@@ -21,13 +21,13 @@ namespace SCTB_HIDI2C_I2CDotNet
 		Arbitration = 1 << 1,
 
 		/// No ack received
-		Acknowledge = 2 << 2,
+		Acknowledge = 1 << 2,
 
 		/// Overrun/underrun
-		Overrun = 3 << 3,
+		Overrun = 1 << 3,
 
 		/// Timeout
-		Timeout = 4 << 4,
+		Timeout = 1 << 4,
 
 		/// unknown error
 		Unknown = Bus
